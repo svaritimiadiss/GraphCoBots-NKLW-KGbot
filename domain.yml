@@ -1,0 +1,367 @@
+#version: "3.2.10"
+
+intents:
+  - welcome
+  - affirm
+  - deny
+  - goodbye # Απάντηση με Carousels
+  - nlu_fallback
+  - swearing
+  - restart
+  - infobot_transference
+  - exhibition_bot_transference
+  - books_type_count
+  - EXTERNAL_reminder
+  - non_greek_language
+  - compliment
+  - number_of_works
+  - inspiration
+  - hobbies
+  - studies
+  - biography
+  - children
+  - food
+  - family
+  - schoolyears
+  - naxos
+  - weddings
+  - galateia
+  - elenisamiou
+  - works
+  - languages
+  - origin
+  - houses
+  - books_names
+  - location_countries
+  - friends_names
+  - relatives_names
+  - publicationyear_book_names
+  - publisher_name
+  - book_description
+  - get_nikos_kazantzakis_occupations
+  - get_kazantzakis_nobel_nominations
+  - religion
+  - philosophy
+  - death
+
+entities:
+  - books_type:
+      - influence_conversation: false
+  - books_names:
+      - influence_conversation: false
+  - books_type_count:
+      - influence_conversation: false
+  - countries:
+      - influence_conversation: false
+  - location_type:
+      - influence_conversation: false
+  - location_names:
+      - influence_conversation: false
+  - relation:
+      - influence_conversation: false
+  - type:
+      - influence_conversation: false
+  - friends_names:
+      - influence_conversation: false
+  - relatives_names:
+      - influence_conversation: false
+  - book_publication_year:
+      - influence_conversation: false
+  - books_publisher_name:
+      - influence_conversation: false
+  - book_description:
+      - influence_conversation: false
+  - book_name_single_text:
+      - influence_conversation: false
+
+slots:
+#   To influence_conversation: false ΔΕΝ λαμβάνει υπόψιν τα slot_was_set που βρίσκονται στα rules!!!
+#   Οπότε θα μπορούσα να παίξω με True χρησιμοποιώντας το ίδιο slot για εξοικονόμηση χώρου και κώδικα!
+  books_type:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: books_type
+      # intent: inform_wife
+      # not_intent: inform_wife
+
+  # Θέλει λιστα γιατι ειναι πολλα ονόματα
+  books_names:
+    type: list
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: books_names
+      # intent: inform_wife
+      # not_intent: inform_wife
+
+  book_name_single_text:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: book_name_single_text
+      # intent: inform_wife
+      # not_intent: inform_wife
+
+  books_type_count:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: books_type_count
+      # intent: inform_wife
+      # not_intent: inform_wife
+
+  countries:
+    type: list
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: countries
+      # intent: inform_wife
+      # not_intent: inform_wife
+
+  location_type:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: location_type
+      # intent: inform_wife
+      # not_intent: inform_wife
+
+  location_names:
+    type: list
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: location_names
+      # intent: inform_wife
+      # not_intent: inform_wife
+
+  type:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: type
+
+  friends_names:
+    type: list
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: friends_names
+
+  relatives_names:
+    type: list
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: relatives_names
+
+  book_publication_year:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: book_publication_year
+
+  books_publisher_name:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: books_publisher_name
+
+  book_description:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: book_description
+
+
+#  books_names_text:
+#    type: text
+#    influence_conversation: false
+#    mappings:
+#    - type: from_entity
+#      entity: books_names_text
+
+  relation:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: relation
+      # intent: inform_wife
+      # not_intent: inform_wife
+
+responses:
+#  utter_ask_which_sizigos:
+#  - text: "Για ποια σύζυγο του Καζαντζάκη θα ήθελες να μάθεις περισσότερα; Τη Γαλάτεια ή την Ελένη Σαμίου;"
+#  utter_cheer_up:
+#  - image: "https://i.imgur.com/nGF1K8f.jpg"
+#    text: "Έχω κάτι που θα σου φτιάξει τη διάθεση:"
+#  utter_did_that_help:
+#  - text: "Σε βοήθησε?"
+  utter_welcome:
+  - text: "Καλώς ήρθατε στον ψηφιακό βοηθό για την ζωή και το έργο του Νίκου Καζαντζάκη. Το όνομα μου είναι Life, εδώ θα ανακαλύψετε άγνωστες πτυχές της ζωής του μεγάλου συγγραφέα καθώς και λεπτομέρειες για τα βιβλία και τα άλλα γραπτά του έργα. Ένας έξυπνος γράφος γνώσης και άλλες ανοικτές πηγές δεδομένων είναι συνδεδεμένες με τον Life για την παροχή πιο εξειδικευμένων πληροφοριών."
+#  utter_human_handoff:
+#  - text: "Το προσωπικό του μουσείου είναι διαθέσιμο καθημερινά Δευτέρα με Παρασκευή, ώρες 10.00-15.00. Μπορείς να επικοινωνήσεις μέσω email info@kazantzaki.gr ή μέσω τηλεφώνου 2810741689. Ωστόσο θα προσπαθήσω να απαντήσω στις ερωτήσεις σας για τη ζωή και το έργο του Νίκου Καζαντζάκη."
+  utter_infobot_transference:
+  - text: 'Χμμμ...'
+    id: "https://proxy.dev.botproxyurl.com/api/bot/infobot/el"
+  utter_exhibition_bot_transference:
+  - text: "Χμμμ..."
+    id: "https://proxy.dev.botproxyurl.com/api/bot/kazantzakis-ex/el"
+  utter_house:
+  - text: "Το σπίτι όπου γεννήθηκε ο Νίκος Καζαντζάκης βρισκόταν στο Ηράκλειο και συγκεκριμένα στη σημερινή οδό «Νίκος Καζαντζάκης». Τότε ήταν ένα σοκάκι στη συνοικία που οι Κρητικοί ονόμαζαν «του Αγίου Ιωάννη Μακελά», αφού εκεί κοντά βρισκόταν ένα σφαγείο. Η αδερφή του, Ελένη Θεοδοσιάδη πούλησε το σπίτι και από τότε το σπίτι πέρασε σε άλλα χέρια και σε ερειπιώδη κατάσταση γκρεμίστηκε το 1956, από βομβαρδισμό στη διάρκεια της γερμανικής κατοχής. Τη θέση του δηλώνει, η λακωνική επιγραφή «Εδώ γεννήθηκε το 1883 ο Νίκος Καζαντζάκης»."
+    image: "https://www.memobot.eu/wp-content/uploads/2022/10/house.jpg"
+  utter_family:
+  - text: "Ο Νίκος Καζαντζάκης ήταν γιος του Μιχάλη Καζαντζάκη, μεγαλέμπορου και κτηματία από τους Βαρβάρους (σημερινή Μυρτιά). Ο Νίκος τον χαρακτηρίζει «άγριο» και «βαρύ» άνδρα, πραγματικό «θεριό». Η Μαρία Χριστοδουλάκη, η μητέρα του, ήταν απλή, ήσυχη γυναίκα, γλυκιά και υποτακτική. Στα μάτια του γιου της φαντάζει σαν μια νεράιδα που κάποια μέρα θα βρει το χαμένο μαγικό της πέπλο και θα φύγει. Επίσης, είχε δύο αδελφές, την Αναστασία (1884) και την Ελένη (1887)."
+    image: "https://www.memobot.eu/wp-content/uploads/2022/10/family.jpg"
+  utter_studies:
+  - text: "Το φθινόπωρο του 1902, ο Καζαντζάκης πηγαίνει στην Αθήνα για σπουδές στη Νομική Σχολή. Το Δεκέμβριο του 1905, παίρνει με άριστα το δίπλωμα του διδάκτορος της Νομικής. Τον Οκτώβριο του 1907, φεύγει για το Παρίσι, όπου συνεχίζει με τις μεταπτυχιακές σπουδές του στη Νομική Σχολή. Ολοκληρώνει τις σπουδές του το 1909 με την συγγραφή της διατριβής του για τη φιλοσοφία του Νίτσε περί του δικαίου και της πολιτείας."
+  utter_biography:
+  - text: "Ο Νίκος Καζαντζάκης γεννήθηκε το 1883 στο Ηράκλειο της τουρκοκρατούμενης Κρήτης. Σπούδασε Νομική στην Αθήνα (1902-1906), και μεταπτυχιακά στο Παρίσι (1907-1909). Την εποχή αυτή αρχίζει η συστηματική του ενασχόληση με τα γράμματα και την συγγραφή βιβλίων. Πραγματοποίησε πλήθος ταξιδιών στο εξωτερικό, αρκετές φορές ως ανταποκριτής εφημερίδων. Το 1956 τιμήθηκε με το Βραβείο Ειρήνης, ενώ προτάθηκε αρκετές φορές για το Νόμπελ λογοτεχνίας. Απεβίωσε στις 26 Οκτωβρίου 1957 στο Φράιμπουργκ της Γερμανίας."
+    image: "https://www.memobot.eu/wp-content/uploads/2022/10/Nikos_Kazantzakis-faq.biography.jpg"
+  utter_schoolyears:
+  - text: "Ο Νίκος Καζαντζάκης τελείωσε το Γυμνάσιο στο Ηράκλειο. Ο Νίκος έρχεται σε επαφή για πρώτη φορά με την τέχνη και συγκεκριμένα με το θέατρο. Παρακολουθεί την πρώτη του θεατρική παράσταση, τους Ληστές του Σίλλερ, ενώ λίγο αργότερα, υποδύεται τον Κρέοντα σε μια σχολική παράσταση του Οιδίποδος τυράννου παρά τις απειλές του πατέρα του που χαρακτήριζε το θέατρο σχολείο ανηθικότητας."
+    image: "https://www.memobot.eu/wp-content/uploads/2022/10/schoolyears.jpg"
+  utter_naxos:
+  - text: "Το 1897 ξέσπασε η τελευταία κρητική επανάσταση εναντίον των Οθωμανών, που ανάγκασε πολλούς Κρητικούς να πάρουν το δρόμο της προσφυγιάς. Έτσι ο πατέρας του, Μιχάλης, αποφασίζει να πάρει την οικογένεια του και να εγκατασταθεί στη Νάξο. Εκεί, ο Νίκος άρχισε να φοιτά στη Γαλλική Εμπορική Σχολή του Τιμίου Σταυρού, έμαθε τη Γαλλική και Αγγλική Γλώσσα και ήρθε σε επαφή με την ευρωπαϊκή παιδεία και λογοτεχνία. Ένας καρδινάλιος τον πείθει να γίνει καθολικός και να συνεχίσει τις σπουδές του στην Ιερατική Σχολή του Βατικανού."
+    image: "https://www.memobot.eu/wp-content/uploads/2022/10/naxos.jpg"
+#  utter_prize:
+#  - text: "Ο Νίκος Καζαντζάκης έβγαινε πρώτος στους διαγωνισμούς 🥇! Στις 23 Ιουνίου 1898 σε διαγωνισμό για το μάθημα «Ιστορία της Γεωγραφίας» έλαβε το πρώτο βραβείο, ένα γαλλικό βιβλιαράκι τσέπης με τον τίτλο «Μήνας της Ιερής Καρδιάς του Ιησού»."
+#    image: "https://www.memobot.eu/wp-content/uploads/2022/10/prize.jpg"
+  utter_weddings:
+  - text: "Ο Νίκος Καζαντζάκης παντρεύτηκε 2 φορές, η πρώτη του σύζυγος ήταν με την Γαλάτεια Αλεξίου και η δεύτερη η Ελένη Σαμίου. Μπορείς, αν θέλεις, να με ρωτήσεις περισσότερα."
+  utter_galateia:
+  - text: "Τον Οκτώβριο του 1911, ο Νίκος Καζαντζάκης παντρεύεται τη Γαλάτεια Αλεξίου την οποία γνώρισε κατά τη διάρκεια των διακοπών του στην Κρήτη. Ο γάμος του ωστόσο δεν κράτησε πολύ καθώς ύστερα από μια χρόνια κρίση, αποφάσισαν να χωρίσουν το 1926."
+    image: "https://www.memobot.eu/wp-content/uploads/2022/10/galateia.jpg"
+  utter_elenisamiou:
+  - text: "Ο Νίκος γνώρισε τη δεύτερη γυναίκα του, Ελένη Σαμίου σε μια εκδρομή με κοινούς φίλους στην Πεντέλη. Παρ’ όλο που εκείνος έχει ήδη εκφράσει την επιθυμία του να είναι σύντροφοι ως το τέλος της ζωής τους, η Ελένη είναι για κάποιο διάστημα διστακτική. Τελικά, αποφασίζει να ξεκινήσει η κοινή τους ζωή το 1928 και τελικά να παντρευτούν, πολλά χρόνια αργότερα, τον Νοέμβριο του 1945 στην Αθήνα."
+    image: "https://www.memobot.eu/wp-content/uploads/2022/10/elenisamiou.jpg"
+  utter_houses:
+  - text: "Το πατρικό του σπίτι βρισκόταν στο Ηράκλειο. Αργότερα μετακομίσε με την οικογένεια του στον Πειραιά και τη Νάξο. Έζησε ως φοιτητής στην Αθήνα, ενώ από το 1933 και έπειτα διέμενε μόνιμα στην Αίγινα μαζί με την Ελένη Σαμίου. Κατά καιρούς διέμενε για κάποια διαστήματα στο εξωτερικό. Το 1948 εγκαταστάθηκε με την Ελένη μόνιμα στην Αντίμπ, στη νότια Γαλλία."
+    image: "https://www.memobot.eu/wp-content/uploads/2024/04/spiti.png"
+#  utter_lenta:
+#  - text: "Το Λέντα που βρίσκεται νότια του Ηρακλείου, επισκέφθηκε το καλοκαίρι του 1924 ο Νίκος Καζαντζάκης συνοδευόμενος από την Ελένη Σαμίου, ενώ αργότερα ήλθε και η σύζυγός του Γαλάτεια Αλεξίου. Η επίσκεψή του στο Λέντα ήταν καθοριστική για τη σχέση του με την Ελένη, μετέπειτα σύζυγό του."
+#  utter_prevelakis:
+#  - text: "Σε μια από τις σύντομες παραμονές του Νίκου Καζαντζάκη στην Αθήνα, το 1926, τον επισκέπτεται ένας δεκαεπτάχρονος μαθητής, ο Παντελής Πρεβελάκης, ο επιστήθιος φίλος και αφοσιωμένος θαυμαστής που θα του μείνει πιστός μέχρι το θάνατό του. Στο επιστολικό αρχείο του Μουσείου Καζαντζάκη βρίσκονται όλες οι επιστολές-απαντήσεις του Παντελή Πρεβελάκη στα γράμματα που του έστειλε ο ΝΚ, τα οποία είναι δημοσιευμένα σε αυτοτελή τόμο, μαζί με τη βιογραφία του συγγραφέα."
+#    image: "https://www.memobot.eu/wp-content/uploads/2022/10/prevelakis.jpg"
+  utter_works:
+  - text: "Ο Νίκος Καζαντζάκης έγινε ευρύτερα γνωστός από τα μυθιστορήματα του. Τα πιο διάσημα βιβλία του είναι το Βίος και πολιτεία του Αλέξη Ζορμπά (1946), 
+      Ο Χριστός Ξανασταυρώνεται (1948), Ο καπετάν Μιχάλης (1950) και άλλα. Το πρώτο του βιβλίο είναι το μυθιστόρημα Όφις και κρίνο (1906). Διακρίθηκε ακόμα στη 
+      δραματουργία, στη συγγραφή ταξιδιωτικών εντυπώσεων, στην ποίηση (Οδύσεια – 1938) και στα φιλοσοφικά δοκίμια (Ασκητική – 1944). Το έργο του έχει μεταφραστεί και εκδοθεί σε περισσότερες 
+      από 50 χώρες και έχει διασκευαστεί για το θέατρο, τον κινηματογράφο, το ραδιόφωνο και την τηλεόραση."
+  utter_number_of_works:
+  - text: "Συνολικά συνέγραψε περίπου 50 πρωτότυπα έργα, μυθιστορήματα, ποιητικές συλλογές, θεατρικά έργα, ταξιδιωτικά αλλά και πάρα πολλά άρθρα σε εφημερίδες και περιοδικά. Επίσης, έκανε πολλές μεταφράσεις και διασκευές παιδικών βιβλίων, κι ακόμη έγραψε λεξικά, αναγνωστικά και βιογραφίες."
+  utter_origin:
+  - text: "Γεννήθηκε στις 18 Φεβρουαρίου το 1883 στο Ηράκλειο Κρήτης οπού πέρασε τα παιδικά του χρόνια. Η καταγωγή του ήταν από το χωριό Βαρβάροι, στη σημερινή Μυρτιά."
+  utter_profession:
+  - text: "Σπούδασε νομική και ασχολήθηκε με τα κοινά αλλά πάντα του άρεσε να γράφει, οπότε τον κέρδισε η τέχνη της συγγραφής, χωρίς βέβαια να το θεωρεί ως επάγγελμα."
+#  utter_faq/number_of_travels:
+#  - text: "Συνολικά ταξίδεψε σε 30 χώρες στην Ευρώπη, την Ασία και την Αφρική."
+  utter_food:
+  - text: "Στον Νίκο Καζαντζάκη δεν άρεσε να τρώει πολύ, αλλά του άρεσε να δοκιμάζει νέες γεύσεις. Ήταν λιτοδίαιτος, λίγες ελιές και παξιμάδια από την Κρήτη τού ήταν αρκετές."
+#  utter_friends:
+#  - text: "Είχε αρκετούς φίλους στην Ελλάδα τόσο στην Κρήτη όσο και στα άλλα μέρη που έζησε και ταξίδεψε. Ο καλύτερος του φίλος ήταν ο ποιητής Άγγελός Σικελιανός."
+  utter_languages:
+  - text: "Ο Καζαντζάκης μιλούσε πολύ καλά αγγλικά, γαλλικά, γερμανικά, ιταλικά, ισπανικά και ρωσικά, ενώ γνώριζε και κάποιες λέξεις και προτάσεις, στα εβραϊκά, στα κινεζικά, στα αραβικά και στα ιαπωνικά. Τα ταξίδια τον είχαν βοηθήσει πολύ να μάθει ξένες γλώσσες."
+  utter_children:
+  - text: "Ο Καζαντζάκης δεν απέκτησε ποτέ παιδιά. Από πολύ νωρίς αφιέρωσε τη ζωή του στο γράψιμο και όπως θεωρούσε και ο ίδιος: τα βιβλία του ήταν τα πνευματικά του παιδιά."
+#  utter_viografika_stoixeia:
+#  - text: "Η ενότητα των βιογραφικών στοιχείων βρίσκεται μετά την αίθουσα υποδοχής του Μουσείου. Στα αριστερά, παρατίθενται 6 χρονολογικές ενότητες με στοιχεία της ζωής του Ν.K. και διαγράμματα των ιστορικών γεγονότων που τα πλαισιώνουν. Απέναντι στις 3 προθήκες, εκτίθενται προσωπικά αντικείμενα, βιογραφικά ντοκουμέντα, σημειώσεις και αλληλογραφία που ξεδιπλώνουν σημαντικές πτυχές της δημόσιας και ιδιωτικής ζωής του συγγραφέα. Τέλος, η ενότητα των βιογραφικών συμπληρώνεται από μια σειρά εικαστικών έργων, όπως σκίτσα και προτομές, και ολοκληρώνεται με την απονομή του βραβείου ειρήνης και το σπάνιο κινηματογραφικό ντοκουμέντο της κηδείας του Καζαντζάκη."
+#  utter_default:
+#  - text: "Συγγνώμη, δεν κατάλαβα καλά 🤷. Θα μπορούσατε να αναδιατυπώσετε;"
+#  - text: "Συγγνώμη, δεν κατάλαβα καλά 🤷. Θα μπορούσατε να επαναλάβετε με άλλα λόγια;"
+#  - text: "Μπορείς να αναδιατυπώσεις; Δεν κατάλαβα τι εννοείς, συγγνώμη. 🤷"
+#  utter_out_of_scope:
+#  - text: "Δυστυχώς η απάντηση που ψάχνεις δεν είναι στο γνωστικό πεδίο μου 🤷. Ρώτησε με κάτι σχετικά με το Μουσείο!"
+  utter_non_greek_language:
+  - text: "I am sorry, but I was trained only in Greek 🇬🇷. If you speak Greek, try asking a general question about the Museum of Nikos Kazantzakis!"
+  utter_compliment:
+  - text: "Χαίρομαι που σε βοήθησα! Υπάρχει κάτι άλλο που θα ήθελες να μάθεις;"
+    quick_replies:
+      - title: "👍"
+        payload: "/affirm"
+      - title: "👎"
+        payload: "/deny"
+#  utter_books_categories:
+#  - text: "Μπορείς να με ρωτήσεις για οποιαδήποτε από τις παρακάτω κατηγορίες βιβλίων:  \n• Μυθιστορήματα  \n• Θεατρικά  \n• Ταξιδιωτικά"
+  utter_swearing:
+  - text: "Σας παρακαλώ να μιλάτε ευγενικά. Προσπάθησε να με ρωτήσεις κάτι άλλο."
+  utter_hobbies:
+  - text: "Ο Καζαντζάκης δεν είχε κάποιο ιδιαίτερο χόμπι. Όταν δεν έγραφε, του άρεσαν οι βόλτες στη θάλασσα και να κάνει μπάνιο. Ακόμα του άρεσε η κηπουρική, τα λουλούδια, οι βόλτες στη φύση, ένα ευχάριστο γλέντι, τα καλαμπούρια και το διάβασμα."
+  utter_inspiration:
+  - text: "Οι αγαπημένοι συγγραφείς, που ενέπνευσαν τον Νίκο Καζαντζάκη, ήταν οι φιλόσοφοι Νίτσε και Ανρί-Λουί Μπεργκσόν. Αλλά αυτός που τον επηρέασε περισσότερο ήταν ο επικός ποιητής Όμηρος."
+  utter_books_type_count:
+  - text: "📁-> Ο Νίκος Καζαντζάκης έχει συγγράψει {books_type_count} {books_type}."
+#  - text: "📁 -> Το πλήθος των βιβλίων κατηγορίας '{books_type}' που έγραψε ο Νίκος Καζαντζάκης είναι: {books_type_count}."
+  utter_books_names:
+  - text: "📁-> Τα {books_type} που έχει συγγράψει ο Νίκος Καζαντζάκης είναι τα ακόλουθα: \n \n {books_names}."
+#  - text: "📁 -> Το πλήθος των βιβλίων κατηγορίας '{books_type}' που έγραψε ο Νίκος Καζαντζάκης είναι: {books_type_count}."
+  utter_location_countries:
+  - text: "📁-> Στον Νίκο Καζαντζάκη άρεσαν τα ταξίδια και είχε ταξιδέψει σε πολλές χώρες, όπως σε: \n \n {countries}. Σε πολλές από αυτές έμεινε για πολύ μεγάλα διαστήματα. Για πολλά από αυτά τα ταξίδια κατέγραφε τις εντυπώσεις του, οι οποίες μετά έγιναν βιβλία."
+#  utter_location_names:
+#  - text: "📁-> Οι {location_type} που ταξίδεψε ο Νίκος Καζαντζάκης ήταν οι ακόλουθες: \n \n {location_names}."
+  utter_friends_names:
+  - text: "📁-> Ο συγγραφέας είχε αρκετούς φίλους στην Ελλάδα, αλλά και στα άλλα μέρη που έζησε και ταξίδεψε. Οι πιο στενοί του φίλοι ήταν οι: \n \n {friends_names}."
+  utter_relatives_names:
+  - text: "📁-> Οι στενοί συγγενείς του ήταν οι: \n \n {relatives_names}."
+  utter_publicationyear_book_names:
+  - text: "📁-> Τo {book_publication_year} εκδόθηκαν τα ακόλουθα βιβλία: \n \n {books_names}."
+  utter_publisher_names:
+  - text: "📁-> Τo βιβλίο με τίτλο {book_name_single_text} έχει εκδοθεί από τον εκδότη: {books_publisher_name}."
+  utter_book_description:
+  - text: "📁-> Το βιβλίο {book_name_single_text} έχει την ακόλουθη υπόθεση: \n \n {book_description}."
+  - text: "📁-> Η περιγραφή του βιβλίου {book_name_single_text} είναι η ακόλουθη: \n \n {book_description}."
+  - text: "📁-> Σχετικά με το βιβλίο {book_name_single_text}, η περιγραφή του είναι: \n \n {book_description}."
+  utter_rephrase:
+  - text: "Η απάντηση δεν υπάρχει στην βάση δεδομένων γράφου 🔍. Θα μπορούσατε να αναδιατυπώσετε;"
+  - text: "Η απάντηση δεν υπάρχει στην βάση δεδομένων γράφου 🔍. Θα μπορούσατε να επαναλάβετε με άλλα λόγια;"
+  utter_religion:
+  - text: "Ο Καζαντζάκης αντιμετώπισε την οργή εκκλησιαστικών κύκλων τόσο της ορθόδοξης, όσο και της καθολικής Εκκλησίας, εξαιτίας κάποιων αποσπασμάτων στα μυθιστορήματα  Καπετάν Μιχάλης και Τελευταίος πειρασμός. Παρόλο που υπήρχαν μεγάλες πιέσεις προς αυτή την κατεύθυνση, δεν αφορίστηκε επίσημα ποτέ. Όπως ανέφερε ο ίδιος: την πίστη του στο θεό την κουβαλούσε πάντα μαζί του και μέσα από τα βιβλία του, αναζητούμε πάντα την Θεία υπόσταση του ανθρώπου."
+  utter_philosophy:
+  - text: "Ο Νίκος Καζαντζάκης ίσως είναι ένας σύγχρονος Έλληνας φιλόσοφος. Η κοσμοθεωρία του γυρνάει γύρω από τον άνθρωπο, τις αξίες και τα ιδανικά. Η πιο σημαντική φράση του ήταν: Δεν ελπίζω τίποτα, δεν φοβούμαι τίποτα, είμαι ελεύθερος, ενώ μια συμβουλή έδινε σε όλους: Ν’ αγαπάς την ευθύνη. Να λες εγώ, εγώ μονάχος μου θα σώσω τον κόσμο. Αν χαθεί, εγώ θα φταίω."
+  utter_death:
+  - text: "Ο Νίκος Καζαντζάκης απεβίωσε στις 26 Οκτωβρίου 1957 στο Φράιμπουργκ της Γερμανίας σε ηλικία 74 χρονών. Πέθανε πιθανώς από ασιατική γρίπη, αν και από το 1951 η υγεία του ήταν ήδη κλονισμένη. Ενταφιάστηκε στον προμαχώνα Μαρτινέγκο στο Ηράκλειο της Κρήτης. Η σορός του μεταφέρθηκε αεροπορικώς στο Ηράκλειο της Κρήτης, όπου και τέθηκε σε λαϊκό προσκύνημα στον Ιερό Ναό του Αγίου Μηνά."
+
+actions:
+  - action_create_OutOfScope_carousels
+  - action_set_reminder
+  - action_react_to_reminder
+  - action_goodbye
+  - action_create_deny_carousels
+  - action_query_graph
+  - action_books_type_count
+  - action_utter_graph_output_books_type_count
+  - action_books_names
+  - action_utter_graph_output_books_names
+  - action_location_countries
+  - action_utter_graph_output_location_countries
+  - action_location_names
+  - action_utter_graph_output_location_names
+  - action_friends_names
+  - action_utter_graph_output_friends_names
+  - action_relatives_names
+  - action_utter_graph_output_relatives_names
+  - action_publicationyear_book_names
+  - action_utter_graph_output_publicationyear_book_names
+  - action_book_info
+  - action_utter_graph_output_publisher_name
+  - action_utter_graph_output_book_description
+  - action_create_welcome_carousels
+  - action_create_fallback_carousels
+  - action_get_nikos_kazantzakis_occupations
+  - action_get_kazantzakis_nobel_nominations
+  - action_default_fallback
+
+session_config:
+  session_expiration_time: 60.0 # value in minutes
+  carry_over_slots_to_new_session: true

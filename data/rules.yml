@@ -1,0 +1,169 @@
+#version: "3.2.10"
+
+rules:
+- rule: trigger infobot transference
+  steps:
+    - intent: infobot_transference
+    - action: action_set_reminder
+    - action: utter_infobot_transference
+
+- rule: trigger_exhibition_bot_transferences
+  steps:
+    - intent: exhibition_bot_transference
+    - action: action_set_reminder
+    - action: utter_exhibition_bot_transference
+
+- rule: react to reminder
+  steps:
+  - intent: EXTERNAL_reminder
+  - action: action_react_to_reminder
+
+- rule: explain i am trained only on greek questions
+  steps:
+  - intent: non_greek_language
+  - action: action_set_reminder
+  - action: utter_non_greek_language
+
+- rule: Ask the user to rephrase whenever they send a message with low NLU confidence
+  steps:
+  - intent: nlu_fallback
+  - action: action_set_reminder
+  - action: action_default_fallback
+
+# ΔΕΝ θελουμε reminder στο goodbye προφανώς αφού το αποχαιρετάμε.
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: action_goodbye
+
+- rule: swearing
+  steps:
+  - intent: swearing
+  - action: action_set_reminder
+  - action: utter_swearing
+
+#- rule: human handoff in case someone wants to speak to a human
+#  steps:
+#  - intent: human_handoff
+#  - action: action_set_reminder
+#  - action: utter_human_handoff
+
+#- rule: user has a question about Nikos Kazantzakis' wife
+#  steps:
+#  - intent: inform_wife
+#  - action: action_set_reminder
+#  - action: action_query_graph
+#  - or:
+#      - slot_was_set:
+#        - married: Ελένη Καζαντζάκη
+#      - slot_was_set:
+#        - wife: bob
+#  - action: action_utter_graph_output
+
+#- rule: user has a question about mobile contract
+#  steps:
+#  - intent: inform_wife
+#  - action: action_query_graph
+#  - slot_was_set:
+#    - wife: Νίκος Καζαντζάκης
+#  - action: utter_clarify_mobile
+
+#- rule: user has a question about an unknown subject from graph knowledge base
+#  steps:
+#  - intent: inform_wife
+#  - action: action_query_graph
+##  - slot_was_set:
+##    - wife: null
+##  - and:
+##       - slot_was_set:
+##         - wife: Νίκος Καζαντζάκης
+##       - slot_was_set:
+##         - wife: None
+##  - action: utter_default
+#  - slot_was_set:
+#    - wife: Νίκος Καζαντζάκης
+#  - action: action_utter_graph_output
+
+#- rule: Nikos Kazantzakis books categories
+#  steps:
+#  - intent: books_categories
+#  - action: utter_books_categories
+
+- rule: neo4j Nikos Kazantzakis books type count
+  steps:
+  - intent: books_type_count
+  - action: action_books_type_count
+  - action: action_set_reminder
+  - action: action_utter_graph_output_books_type_count
+
+- rule: neo4j Nikos Kazantzakis books type count
+  steps:
+  - intent: books_names
+  - action: action_books_names
+  - action: action_set_reminder
+  - action: action_utter_graph_output_books_names
+
+- rule: neo4j Nikos Kazantzakis countries travelled
+  steps:
+  - intent: location_countries
+  - action: action_location_countries
+  - action: action_set_reminder
+  - action: action_utter_graph_output_location_countries
+
+- rule: neo4j Nikos Kazantzakis his friends names
+  steps:
+  - intent: friends_names
+  - action: action_friends_names
+  - action: action_set_reminder
+  - action: action_utter_graph_output_friends_names
+
+- rule: neo4j Nikos Kazantzakis his relative names
+  steps:
+  - intent: relatives_names
+  - action: action_relatives_names
+  - action: action_set_reminder
+  - action: action_utter_graph_output_relatives_names
+
+- rule: neo4j Nikos Kazantzakis query book names based on publication year
+  steps:
+  - intent: publicationyear_book_names
+  - action: action_publicationyear_book_names
+  - action: action_set_reminder
+  - action: action_utter_graph_output_publicationyear_book_names
+
+- rule: neo4j Nikos Kazantzakis query publishers names
+  steps:
+  - intent: publisher_name
+  - action: action_book_info
+  - action: action_set_reminder
+  - action: action_utter_graph_output_publisher_name
+
+- rule: neo4j Nikos Kazantzakis query books descriptions
+  steps:
+  - intent: book_description
+  - action: action_book_info
+  - action: action_set_reminder
+  - action: action_utter_graph_output_book_description
+
+#- rule: neo4j Nikos Kazantzakis cities travelled
+#  steps:
+#  - intent: location_cities
+#  - action: action_location_areas
+#  - action: action_utter_graph_output_location_areas
+- rule: religion
+  steps:
+  - intent: religion
+  - action: action_set_reminder
+  - action: utter_religion
+
+- rule: philosophy
+  steps:
+  - intent: philosophy
+  - action: action_set_reminder
+  - action: utter_philosophy
+  
+- rule: death
+  steps:
+  - intent: death
+  - action: action_set_reminder
+  - action: utter_death

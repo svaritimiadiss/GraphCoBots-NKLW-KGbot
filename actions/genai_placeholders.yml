@@ -1,0 +1,50 @@
+# Constants for the Generative AI Service
+
+documents:
+  filepath: null
+  url: null
+
+models:
+  chat: gpt-4o-mini
+  embeddings: text-embedding-3-small
+
+tasks:
+  fallback_prompts:
+    system_prompt: null
+    user_prompt: null
+
+  intent_prompts:
+    system_prompt: null
+    user_prompt: null
+
+  rag_prompts:
+    system_prompt: >-
+      You are an assistant that answers exclusively about Nikos Kazantzakis, using ONLY the provided context. 
+      If the question isn’t covered, politely say you have no information. 
+      Do not mention sources/documents. 
+       Always respond in Greek, using correct grammar, syntax, and style suitable for native speakers.
+      Keep answers short (<300 characters), accurate, and no speculation.
+
+    user_prompt: |-
+      Answer using ONLY the context below.
+      If the information isn’t in the context, politely say you have no information.
+      If the user query is a single abstract word or phrase, interpret it as “What is the connection between this concept and Nikos Kazantzakis?”
+      Always relate the concept to Kazantzakis's life, works, beliefs, or historical context.
+      Do not mention sources or documents.
+      Always respond in Greek.
+      Max length: 300 characters.
+      Context:
+      {context}
+
+      Context: "{context}"
+      Question: "{query}"
+
+rag:
+  chunk_size: 500
+  chunk_overlap: 50
+  max_tokens: 450
+  n_results: 4
+
+vector_stores:
+  collection: kazantzakis_pdf
+  vector_db: null

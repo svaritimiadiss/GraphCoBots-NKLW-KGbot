@@ -1,0 +1,255 @@
+#version: "3.2.10"
+
+stories:
+- story: greet conversation start
+  steps:
+  - intent: welcome
+  - action: action_set_reminder
+  - action: action_create_welcome_carousels
+
+#- story: find out which wife he had if the message is generic
+#  steps:
+#    - intent:
+
+- story: Say goodbye when affirm
+  steps:
+  - intent: compliment
+  - action: utter_compliment
+  - intent: affirm
+  - action: action_create_deny_carousels
+
+# ΔΕΝ θελουμε reminder στο goodbye προφανώς αφού το αποχαιρετάμε.
+- story: Say goodbye when deny
+  steps:
+  - intent: compliment
+  - action: utter_compliment
+  - intent: deny
+  - action: action_goodbye
+
+- story: number_of_works
+  steps:
+  - intent: number_of_works
+  - action: action_set_reminder
+  - action: utter_number_of_works
+
+- story: inspiration
+  steps:
+  - intent: inspiration
+  - action: action_set_reminder
+  - action: utter_inspiration
+
+- story: hobbies
+  steps:
+  - intent: hobbies
+  - action: action_set_reminder
+  - action: utter_hobbies
+
+- story: family
+  steps:
+  - intent: family
+  - action: action_set_reminder
+  - action: utter_family
+
+- story: children
+  steps:
+  - intent: children
+  - action: action_set_reminder
+  - action: utter_children
+
+- story: family and children
+  steps:
+  - intent: family
+  - action: action_set_reminder
+  - action: utter_family
+  - intent: children
+  - action: action_set_reminder
+  - action: utter_children
+
+#- story: friends
+#  steps:
+#  - intent: friends
+#  - action: action_set_reminder
+#  - action: utter_friends
+
+- story: food
+  steps:
+  - intent: food
+  - action: action_set_reminder
+  - action: utter_food
+
+- story: naxos
+  steps:
+  - intent: naxos
+  - action: action_set_reminder
+  - action: utter_naxos
+
+- story: schoolyears
+  steps:
+  - intent: schoolyears
+  - action: action_set_reminder
+  - action: utter_schoolyears
+
+- story: schoolyears + get_kazantzakis_nobel_nominations
+  steps:
+  - intent: schoolyears
+  - action: action_set_reminder
+  - action: utter_schoolyears
+  - intent: get_kazantzakis_nobel_nominations
+  - action: action_set_reminder
+  - action: action_get_kazantzakis_nobel_nominations
+
+- story: weddings + galateia
+  steps:
+  - intent: weddings
+  - action: action_set_reminder
+  - action: utter_weddings
+  - intent: galateia
+  - action: action_set_reminder
+  - action: utter_galateia
+
+- story: weddings + elenisamiou
+  steps:
+  - intent: weddings
+  - action: action_set_reminder
+  - action: utter_weddings
+  - intent: elenisamiou
+  - action: action_set_reminder
+  - action: utter_elenisamiou
+
+- story: galateia
+  steps:
+  - intent: galateia
+  - action: action_set_reminder
+  - action: utter_galateia
+
+- story: elenisamiou
+  steps:
+  - intent: elenisamiou
+  - action: action_set_reminder
+  - action: utter_elenisamiou
+
+- story: ask for both wives 1
+  steps:
+  - intent: galateia
+  - action: action_set_reminder
+  - action: utter_galateia
+  - intent: elenisamiou
+  - action: action_set_reminder
+  - action: utter_elenisamiou
+
+- story: ask for both wives 2
+  steps:
+  - intent: elenisamiou
+  - action: action_set_reminder
+  - action: utter_elenisamiou
+  - intent: galateia
+  - action: action_set_reminder
+  - action: utter_galateia
+
+#- story: prevelakis
+#  steps:
+#  - intent: prevelakis
+#  - action: action_set_reminder
+#  - action: utter_prevelakis
+
+- story: studies
+  steps:
+  - intent: studies
+  - action: action_set_reminder
+  - action: utter_studies
+
+- story: biography
+  steps:
+  - intent: biography
+  - action: action_set_reminder
+  - action: utter_biography
+
+- story: works
+  steps:
+  - intent: works
+  - action: action_set_reminder
+  - action: utter_works
+
+- story: biography + get_nikos_kazantzakis_occupations + works
+  steps:
+  - intent: biography
+  - action: action_set_reminder
+  - action: utter_biography
+  - intent: get_nikos_kazantzakis_occupations
+  - action: action_set_reminder
+  - action: action_get_nikos_kazantzakis_occupations
+  - intent: works
+  - action: action_set_reminder
+  - action: utter_works
+
+- story: origin
+  steps:
+  - intent: origin
+  - action: action_set_reminder
+  - action: utter_origin
+
+- story: biography + origin
+  steps:
+  - intent: biography
+  - action: action_set_reminder
+  - action: utter_biography
+  - intent: origin
+  - action: action_set_reminder
+  - action: utter_origin
+
+- story: languages
+  steps:
+  - intent: languages
+  - action: action_set_reminder
+  - action: utter_languages
+
+- story: houses
+  steps:
+  - intent: houses
+  - action: action_set_reminder
+  - action: utter_houses
+
+- story: Get occupations of Nikos Kazantzakis
+  steps:
+  - intent: get_nikos_kazantzakis_occupations
+  - action: action_set_reminder
+  - action: action_get_nikos_kazantzakis_occupations
+
+- story: Get Kazantzakis Nobel Nominations
+  steps:
+  - intent: get_kazantzakis_nobel_nominations
+  - action: action_set_reminder
+  - action: action_get_kazantzakis_nobel_nominations
+
+#- story: happy path
+#  steps:
+#  - intent: mood_great
+#  - action: action_set_reminder
+#  - action: utter_happy
+#  - action: action_set_reminder
+## ΔΕΝ χρειάζεται να βάλουμε goodbye γιατί είναι στα rules!
+#
+#- story: sad path 1
+#  steps:
+#  - intent: mood_unhappy
+#  - action: action_set_reminder
+#  - action: utter_cheer_up
+#  - action: utter_did_that_help
+#  - intent: affirm
+#  - action: action_set_reminder
+#  - action: utter_happy
+#
+#- story: sad path 2
+#  steps:
+#  - intent: mood_unhappy
+#  - action: action_set_reminder
+#  - action: utter_cheer_up
+#  - action: utter_did_that_help
+#  - intent: deny
+#  - action: action_set_reminder
+
+#- story: carousels test
+#  steps:
+#  - intent: collections
+#  - action: action_set_reminder
+#  - action: action_create_carousels
